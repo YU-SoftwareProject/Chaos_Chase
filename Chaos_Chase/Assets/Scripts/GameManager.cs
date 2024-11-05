@@ -7,14 +7,17 @@ using TMPro;
 public class GameManager : MonoBehaviour
 {
     public GameObject casePanel;
+    public GameObject noteImage;
     public TMP_InputField inputName;
     public TMP_InputField inpuCaseType;
     public TMP_InputField inpuVictimName;
     public TMP_InputField inputOccupation;
     public TMP_InputField inputBackground;
     public TMP_InputField inputSuspect;
+    public TMP_InputField inputNote;
 
     private int caseBtnClickCount = 0;
+    private int noteBtnClickCount = 0;
 
     public void OnCaseBtnClick() 
     {
@@ -26,19 +29,19 @@ public class GameManager : MonoBehaviour
         // Case Record 버튼을 다시 눌러 Case Record 패널을 켰을 경우, 불러오기 및 패널 활성화
         else if (caseBtnClickCount % 2 == 0 && caseBtnClickCount > 0)
         {
-            Load();
+            LoadCase();
             casePanel.SetActive(true);
         }
         // Case Record 버튼을 다시 눌러 Case Record 패널을 껐을 경우, 저장 및 패널 비활성화
         else 
         {
-            Save();
+            SaveCase();
             casePanel.SetActive(false);
         }
          caseBtnClickCount++;
     }
     
-    public void Save() 
+    public void SaveCase() 
     {
         PlayerPrefs.SetString("Name", inputName.text);
         PlayerPrefs.SetString("CaseType", inpuCaseType.text);
@@ -48,7 +51,7 @@ public class GameManager : MonoBehaviour
         PlayerPrefs.SetString("Suspect", inputSuspect.text);
     }
 
-    public void Load() 
+    public void LoadCase() 
     {
         if(PlayerPrefs.HasKey("Name"))
         {
@@ -58,6 +61,41 @@ public class GameManager : MonoBehaviour
             inputOccupation.text = PlayerPrefs.GetString("Occupation");
             inputBackground.text = PlayerPrefs.GetString("Background");
             inputSuspect.text = PlayerPrefs.GetString("Suspect");
+        }
+    }
+
+    public void OnNoteBtnClick()
+    {
+        // Note 버튼을 처음 눌렀을 경우, 패널 활성화
+        if (noteBtnClickCount == 0) 
+        {
+            noteImage.SetActive(true);
+        }
+        // Note 버튼을 다시 눌러 Note를 켰을 경우, 불러오기 및 패널 활성화
+        else if (noteBtnClickCount % 2 == 0 && noteBtnClickCount > 0)
+        {
+            LoadNote();
+            noteImage.SetActive(true);
+        }
+        // Note 버튼을 다시 눌러 Note를 껐을 경우, 저장 및 패널 비활성화
+        else 
+        {
+            SaveNote();
+            noteImage.SetActive(false);
+        }
+         noteBtnClickCount++;
+    }
+
+    public void SaveNote()
+    {
+        PlayerPrefs.SetString("Note", inputNote.text);
+    }
+
+    public void LoadNote()
+    {
+        if(PlayerPrefs.HasKey("Name"))
+        {
+            inputNote.text = PlayerPrefs.GetString("Note");
         }
     }
 }
