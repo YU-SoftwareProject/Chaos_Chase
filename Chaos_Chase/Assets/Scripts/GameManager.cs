@@ -19,6 +19,9 @@ public class GameManager : MonoBehaviour
     private int caseBtnClickCount = 0;
     private int noteBtnClickCount = 0;
 
+    public GameObject inventoryPanel;
+    bool activeInventory = false;
+
     public void OnCaseBtnClick() 
     {
         // Case Record 버튼을 처음 눌렀을 경우, 패널 활성화
@@ -96,6 +99,16 @@ public class GameManager : MonoBehaviour
         if(PlayerPrefs.HasKey("Name"))
         {
             inputNote.text = PlayerPrefs.GetString("Note");
+        }
+    }
+
+    private void Update() 
+    {
+        // I 키를 누르면 인벤토리 활성화
+        if (Input.GetKeyDown(KeyCode.I))
+        {
+            activeInventory = !activeInventory;
+            inventoryPanel.SetActive(activeInventory);
         }
     }
 }
