@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657654, g: 0.49641007, b: 0.5748153, a: 1}
+  m_IndirectSpecularColor: {r: 0.4465767, g: 0.4964102, b: 0.5748154, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -193,6 +193,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 5241267463746980526, guid: f2e0b7ae4dae8cf44955bccd3512b213, type: 3}
       insertIndex: -1
       addedObject: {fileID: 81510834}
+    - targetCorrespondingSourceObject: {fileID: 5241267463746980526, guid: f2e0b7ae4dae8cf44955bccd3512b213, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 81510835}
   m_SourcePrefab: {fileID: 100100000, guid: f2e0b7ae4dae8cf44955bccd3512b213, type: 3}
 --- !u!4 &81510826 stripped
 Transform:
@@ -227,6 +230,21 @@ MonoBehaviour:
   PlayerCamera: {fileID: 81510828}
   PickupRange: 10
   Hand: {fileID: 1721676717}
+--- !u!114 &81510835
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 81510827}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4e1b9a2787ff4a428133fc5a05b06a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerSpeed: 0
+  currentFov: 0
+  desiredFov: 0
 --- !u!1 &380312584
 GameObject:
   m_ObjectHideFlags: 0
@@ -1248,5 +1266,5 @@ SceneRoots:
   - {fileID: 1722744070}
   - {fileID: 1886229569}
   - {fileID: 1409978943}
-  - {fileID: 81510825}
   - {fileID: 432229100}
+  - {fileID: 81510825}
