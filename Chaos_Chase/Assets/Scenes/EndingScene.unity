@@ -13112,7 +13112,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5241267463746980526, guid: f2e0b7ae4dae8cf44955bccd3512b213, type: 3}
       propertyPath: m_Name
-      value: First Person Controller
+      value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 5256384803381100468, guid: f2e0b7ae4dae8cf44955bccd3512b213, type: 3}
+      propertyPath: field of view
+      value: 70
       objectReference: {fileID: 0}
     - target: {fileID: 5269945355364510514, guid: f2e0b7ae4dae8cf44955bccd3512b213, type: 3}
       propertyPath: canRun
