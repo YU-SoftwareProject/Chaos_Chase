@@ -25,6 +25,7 @@ public class AniController : MonoBehaviour
     // NPC2 버튼 클릭 시 Oliver 앉기 애니메이션 동작
     public void OnNPC2ButtonClick()
     {
+        NPCSelection_Panel.SetActive(false);
         npc.SetActive(true);
         ani.SetTrigger("OliverSitting");
     }
@@ -32,6 +33,7 @@ public class AniController : MonoBehaviour
     // NPC3 버튼 클릭 시 Lucy 앉기 애니메이션 동작
     public void OnNPC3ButtonClick()
     {
+        NPCSelection_Panel.SetActive(false);
         npc.SetActive(true);
         ani.SetTrigger("LucySitting");
     }
@@ -39,6 +41,7 @@ public class AniController : MonoBehaviour
     // NPC4 버튼 클릭 시 Leo 앉기 애니메이션 동작
     public void OnNPC4ButtonClick()
     {
+        NPCSelection_Panel.SetActive(false);
         npc.SetActive(true);
         ani.SetTrigger("LeoSitting");
     }
