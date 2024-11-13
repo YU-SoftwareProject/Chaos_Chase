@@ -8,6 +8,9 @@ public class FinishButtonController : MonoBehaviour
     public GameObject FinishButton;
     public NPCManager npcManager;
 
+    //새롭게 추가(2024/11/13)
+    public GameObject Chat_Panel;
+
     void Start()
     {
         FinishButton.SetActive(false);
@@ -23,6 +26,7 @@ public class FinishButtonController : MonoBehaviour
     {
         FinishButton.SetActive(false);
         NPCSelection_Panel.SetActive(true);
+        Chat_Panel.SetActive(false);
 
         if (npcManager != null)
         {
