@@ -17,4 +17,12 @@ public class NPCManager : MonoBehaviour
         npcLucy.SetActive(false);
         npcLeo.SetActive(false);
     }
+
+    public void DeactivateAllNPCs()
+    {
+        npcMaya.SetActive(false);
+        npcOlver.SetActive(false);
+        npcLucy.SetActive(false);
+        npcLeo.SetActive(false);
+    }
 }
