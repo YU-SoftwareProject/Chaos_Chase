@@ -102,6 +102,12 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void OnFinishBtnClick()
+    {
+        // (Interrogation Scene으로) 씬 전환 코드 추가
+        Debug.Log("finish 버튼 클릭");
+    }
+
     private void Update() 
     {
         // I 키를 누르면 인벤토리 활성화
