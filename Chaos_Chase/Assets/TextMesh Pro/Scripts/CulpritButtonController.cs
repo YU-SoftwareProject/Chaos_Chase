@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor.VersionControl;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class CulpritButtonController : MonoBehaviour
 {
@@ -19,6 +20,8 @@ public class CulpritButtonController : MonoBehaviour
     {
         CulpritSelection_Panel.SetActive(false);
         MessageBox.SetActive(false);
+        //새롭게 추가 (2024/11/18) 씬 전환시 Object 유지
+        DontDestroyOnLoad(gameObject); 
     }
 
     public void OnMayaBtnClick() 
@@ -49,7 +52,8 @@ public class CulpritButtonController : MonoBehaviour
             StartCoroutine(ActivateMessageBox(3f));
         }
 
-        // (Ending Scene으로) 씬 전환 코드 추가
+        // (Ending Scene으로) 씬 전환 코드 추가 (2024/11/18)
+        SceneManager.LoadScene("EndingScene");
         Debug.Log("Decide Culprit 버튼 클릭");
     }
 
