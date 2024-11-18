@@ -19,6 +19,8 @@ public class CulpritButtonController : MonoBehaviour
     {
         CulpritSelection_Panel.SetActive(false);
         MessageBox.SetActive(false);
+        //새롭게 추가 (2024/11/18) 씬 전환시 Object 유지
+        DontDestroyOnLoad(gameObject); 
     }
 
     public void OnMayaBtnClick() 
