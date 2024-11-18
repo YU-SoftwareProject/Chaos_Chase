@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.63467616, g: 0.68496704, b: 0.69828117, a: 1}
+  m_IndirectSpecularColor: {r: 0.6345557, g: 0.6848663, b: 0.6981924, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -12406,7 +12406,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5241267463746980526, guid: f2e0b7ae4dae8cf44955bccd3512b213, type: 3}
       propertyPath: m_Name
-      value: First Person Controller
+      value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 5256384803381100468, guid: f2e0b7ae4dae8cf44955bccd3512b213, type: 3}
+      propertyPath: field of view
+      value: 70
       objectReference: {fileID: 0}
     - target: {fileID: 5269945355364510514, guid: f2e0b7ae4dae8cf44955bccd3512b213, type: 3}
       propertyPath: canRun
@@ -15786,6 +15790,6 @@ SceneRoots:
   - {fileID: 1521025566}
   - {fileID: 1819976778}
   - {fileID: 2135416692}
-  - {fileID: 1955113334}
   - {fileID: 216674176}
   - {fileID: 1725795418}
+  - {fileID: 1955113334}
