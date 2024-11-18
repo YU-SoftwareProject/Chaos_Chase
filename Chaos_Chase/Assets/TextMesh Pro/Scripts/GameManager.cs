@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -104,7 +105,8 @@ public class GameManager : MonoBehaviour
 
     public void OnFinishBtnClick()
     {
-        // (Interrogation Scene으로) 씬 전환 코드 추가
+        // (Interrogation Scene으로) 씬 전환 코드 추가 (2024/11/18)
+        SceneManager.LoadScene("Interrogation Scene");
         Debug.Log("finish 버튼 클릭");
     }
 
