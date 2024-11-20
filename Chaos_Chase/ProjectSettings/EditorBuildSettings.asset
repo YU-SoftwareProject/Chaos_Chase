@@ -6,9 +6,15 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/EndingScene.unity
-    guid: 99c9720ab356a0642a771bea13969a05
+    path: Assets/Scenes/MainMenuScene.unity
+    guid: 20c1df2065355224dbf901719df6c824
+  - enabled: 1
+    path: Assets/Scenes/InvestigationScene.unity
+    guid: d39a55ab149b91d46ab99f8ad07fd435
   - enabled: 1
     path: Assets/Scenes/Interrogation Scene.unity
     guid: 6450939254db6084cb29950f598bc543
+  - enabled: 1
+    path: Assets/Scenes/EndingScene.unity
+    guid: 99c9720ab356a0642a771bea13969a05
   m_configObjects: {}
