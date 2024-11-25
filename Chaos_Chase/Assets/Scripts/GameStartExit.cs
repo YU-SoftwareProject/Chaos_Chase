@@ -5,9 +5,21 @@ using UnityEngine.SceneManagement;
 
 public class GameStartExit : MonoBehaviour
 {
+    public GameObject SelectorPanel;
+    public SelectorScript selectorScript;
+
     public void OnStartBtnClick()
     {
+        SelectorPanel.SetActive(true);
+    }
+
+    public void OnConfirmBtnClick()
+    {
         SceneManager.LoadScene("InvestigationScene");
+    }
+    public void ClosePanel()
+    {
+        SelectorPanel.SetActive(false);
     }
 
     public void OnExitBtnClick()
