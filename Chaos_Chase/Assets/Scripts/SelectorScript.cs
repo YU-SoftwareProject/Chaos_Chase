@@ -17,30 +17,29 @@ public class SelectorScript : MonoBehaviour
     public GameObject character1;
     public GameObject character2;
 
+    public string playerName;
+    public int playerAge;
+    public bool isMale;
+
     public InputField nameInputField;
     public InputField ageInputField;
 
-    public string playerName;
-    public int playerAge;
+    public Toggle maleToggle;
+    public Toggle femaleToggle;
+    public ToggleGroup genderGroup;
 
     void Start()
     {
-        if (!PlayerPrefs.HasKey("char1"))
-        {
-            char1 = true;
-            char2 = false;
-        }
+        char1 = true;
+        char2 = false;
+
+        maleToggle.isOn = true;
+        femaleToggle.isOn = false;
 
         if (gameStart)
         {
             ActivateSelectedCharacter();
         }
-
-        playerName = PlayerPrefs.GetString("PlayerName", "");
-        playerAge = PlayerPrefs.GetInt("PlayerAge", 0);
-
-        nameInputField.text = playerName;
-        ageInputField.text = playerAge > 0 ? playerAge.ToString() : "";
     }
 
     private void ActivateSelectedCharacter()
@@ -82,26 +81,21 @@ public class SelectorScript : MonoBehaviour
         }
     }
 
-    public void SaveBools()
+    public void OnGenderChanged()
     {
-        PlayerPrefs.SetInt("char1", char1 ? 1 : 0);
-        PlayerPrefs.SetInt("char2", char2 ? 1 : 0);
+        isMale = maleToggle.isOn;
     }
     public void SavePlayerInfo()
     {
         if (nameInputField != null)
         {
             playerName = nameInputField.text;
-            PlayerPrefs.SetString("PlayerName", playerName);
         }
-
         if (ageInputField != null)
         {
             playerAge = int.TryParse(ageInputField.text, out int age) ? age : 0;
-            PlayerPrefs.SetInt("PlayerAge", playerAge);
         }
-
-        PlayerPrefs.Save();
+        isMale = maleToggle.isOn;
     }
 
     private void Update()
