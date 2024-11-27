@@ -52,9 +52,13 @@ public class CulpritButtonController : MonoBehaviour
             StartCoroutine(ActivateMessageBox(3f));
         }
 
-        // (Ending Scene으로) 씬 전환 코드 추가 (2024/11/18)
-        SceneManager.LoadScene("EndingScene");
-        Debug.Log("Decide Culprit 버튼 클릭");
+        // 범인을 선택한 상태여야 범인 선택 버튼을 클릭 시 씬 전환 코드가 실행되도록 로직 변경
+        if (Culprit != null)
+        {
+            // (Ending Scene으로) 씬 전환 코드 추가 (2024/11/18)
+            SceneManager.LoadScene("EndingScene");
+        }
+        
     }
 
     // 'Please Decide the Culprit' 메시지 박스를 활성화하는 함수
