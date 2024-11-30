@@ -55,8 +55,7 @@ public class CulpritButtonController : MonoBehaviour
         // 범인을 선택한 상태여야 범인 선택 버튼을 클릭 시 씬 전환 코드가 실행되도록 로직 변경
         if (Culprit != null)
         {
-            // (Ending Scene으로) 씬 전환 코드 추가 (2024/11/18)
-            SceneManager.LoadScene("EndingScene");
+            LoadingSceneController.LoadScene("EndingScene");
         }
         
     }

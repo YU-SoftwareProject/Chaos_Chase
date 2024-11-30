@@ -105,9 +105,7 @@ public class GameManager : MonoBehaviour
 
     public void OnFinishBtnClick()
     {
-        // (Interrogation Scene으로) 씬 전환 코드 추가 (2024/11/18)
-        SceneManager.LoadScene("Interrogation Scene");
-        Debug.Log("finish 버튼 클릭");
+        LoadingSceneController.LoadScene("Interrogation Scene");
     }
 
     private void Update() 
