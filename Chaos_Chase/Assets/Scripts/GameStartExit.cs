@@ -8,18 +8,12 @@ public class GameStartExit : MonoBehaviour
     public GameObject SelectorPanel;
     public SelectorScript selectorScript;
 
+    public GameObject noDataPanel;
+    public GameObject deleteDataPanel;
+
     public void OnStartBtnClick()
     {
         SelectorPanel.SetActive(true);
-    }
-
-    public void OnConfirmBtnClick()
-    {
-        SceneManager.LoadScene("InvestigationScene");
-    }
-    public void ClosePanel()
-    {
-        SelectorPanel.SetActive(false);
     }
 
     public void OnExitBtnClick()
@@ -30,5 +24,17 @@ public class GameStartExit : MonoBehaviour
 #if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;
 #endif
+    }
+
+    public void OnBackBtnClcik()
+    {
+        SelectorPanel.SetActive(false);
+        noDataPanel.SetActive(false);
+        deleteDataPanel.SetActive(false);
+    }
+
+    public void OnConfirmBtnClick()
+    {
+        SceneManager.LoadScene("InvestigationScene");
     }
 }
