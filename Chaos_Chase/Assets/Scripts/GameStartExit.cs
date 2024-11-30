@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class GameStartExit : MonoBehaviour
 {
@@ -35,6 +34,6 @@ public class GameStartExit : MonoBehaviour
 
     public void OnConfirmBtnClick()
     {
-        SceneManager.LoadScene("InvestigationScene");
+        LoadingSceneController.LoadScene("InvestigationScene");
     }
 }
