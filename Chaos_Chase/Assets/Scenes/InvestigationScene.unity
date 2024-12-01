@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641275, b: 0.5748172, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657892, g: 0.4964128, b: 0.5748173, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -6928,6 +6928,10 @@ PrefabInstance:
     - target: {fileID: 5256384803381100468, guid: f2e0b7ae4dae8cf44955bccd3512b213, type: 3}
       propertyPath: field of view
       value: 70
+      objectReference: {fileID: 0}
+    - target: {fileID: 5256384803381100468, guid: f2e0b7ae4dae8cf44955bccd3512b213, type: 3}
+      propertyPath: near clip plane
+      value: 0.01
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -15957,8 +15961,8 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: -4662501251497584869, guid: c9f1d8cd7c2566f4a9066656d0bc9fb2, type: 3}
   m_PrefabInstance: {fileID: 2038900890}
   m_PrefabAsset: {fileID: 0}
---- !u!65 &2025040652
-BoxCollider:
+--- !u!64 &2025040649
+MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -15975,9 +15979,10 @@ BoxCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 387.78784, y: 280.99213, z: 10}
-  m_Center: {x: 0, y: 1.7934418, z: 210}
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 2363119320313181995, guid: c9f1d8cd7c2566f4a9066656d0bc9fb2, type: 3}
 --- !u!1001 &2038900890
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -16059,7 +16064,7 @@ PrefabInstance:
       addedObject: {fileID: 2038900899}
     - targetCorrespondingSourceObject: {fileID: -4662501251497584869, guid: c9f1d8cd7c2566f4a9066656d0bc9fb2, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 2025040652}
+      addedObject: {fileID: 2025040649}
     - targetCorrespondingSourceObject: {fileID: -5400525121949782639, guid: c9f1d8cd7c2566f4a9066656d0bc9fb2, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2038900898}
