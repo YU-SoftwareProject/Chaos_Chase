@@ -1,42 +1,41 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
 public class ObjectInfoDisplay : MonoBehaviour
 {
-    public TextMeshProUGUI infoText;
-    private Coroutine hideCoroutine;
+    public GameObject panel; // 패널 오브젝트
+    public TextMeshProUGUI infoText; // 패널 내 텍스트
+
+
 
     private void Start()
     {
         if (infoText != null)
         {
+            panel.SetActive(false);
             infoText.gameObject.SetActive(false);
         }
     }
 
     private void OnMouseDown()
     {
-        if (infoText != null)
+
+        if (panel != null && infoText != null)
         {
+            panel.SetActive(true);
             infoText.gameObject.SetActive(true);
-
-            if (hideCoroutine != null)
-            {
-                StopCoroutine(hideCoroutine);
-            }
-
-            hideCoroutine = StartCoroutine(HideTextAfterSeconds(2f));
         }
     }
 
-    private IEnumerator HideTextAfterSeconds(float seconds)
+    public void ClosePanel()
     {
-        yield return new WaitForSeconds(seconds);
-        infoText.gameObject.SetActive(false);
+        if (panel != null)
+        {
+            panel.SetActive(false);
+            infoText.gameObject.SetActive(false);
+        }
     }
-    
-        
+
 }
