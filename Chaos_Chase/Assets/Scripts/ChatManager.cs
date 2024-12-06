@@ -8,13 +8,17 @@ using System.IO;
 public class ChatManager : MonoBehaviour
 {
     public GameObject Chat_Panel;
+    public GameObject LieDetect_Panel;
     public TextMeshProUGUI chatText;
+    public TextMeshProUGUI LieText;
     public TextMeshProUGUI NPCName;
     public TMP_InputField userInputField;
     public Button[] suspectButtons;
     public Button sendButton;
+    public Button LieDetectionButton;
     public string fileContent;
     public ChatGPTClient chatGPTClient;
+    private string lastTruthStatus = "";
     private List<ChatGPTClient.Message> messageHistory = new List<ChatGPTClient.Message>();
     private Dictionary<string, NPC> npcSettings = new Dictionary<string, NPC>();
 
@@ -23,7 +27,6 @@ public class ChatManager : MonoBehaviour
         public int StressLevel;
         public List<string> TopicsToLie;
         public int BaselineStress;
-        public int StressResistance;
         public Dictionary<string, int> SensitiveTopics;
 
         public NPC()
@@ -31,7 +34,6 @@ public class ChatManager : MonoBehaviour
             StressLevel = 0;
             TopicsToLie = new List<string>();
             BaselineStress = 0;
-            StressResistance = 0;
             SensitiveTopics = new Dictionary<string, int>();
         }
     }
@@ -69,10 +71,8 @@ public class ChatManager : MonoBehaviour
                     break;
             }
 
-            stressChange = Mathf.RoundToInt(stressChange/npc.StressResistance);
-
             npc.StressLevel += stressChange;
-            npc.StressLevel = Mathf.Clamp(npc.StressLevel, 0, 100);
+            npc.StressLevel = Mathf.Clamp(npc.StressLevel, 0, 200);
             Debug.Log($"Stress change: {stressChange}, new stress level: {npc.StressLevel}");
 
         }
@@ -85,16 +85,16 @@ public class ChatManager : MonoBehaviour
     string DetermineEmotion(int stressLevel)
     {
         Debug.Log($"Stress Level: {stressLevel}");
-        if (stressLevel == 100)
+        if (stressLevel == 200)
         {
             return "현재 스트레스가 최대치입니다. 질문에 불쾌감을 표출하며 때때로 답변 거부도 합니다.";
         }
-        else if (stressLevel > 70)
+        else if (stressLevel > 130)
         {
             return "현재 스트레스를 많이 받은 상태이므로 거짓말을 하고, 횡설수설하며 감정표현이 더 격해집니다.";
         }
 
-        else if (stressLevel > 40)
+        else if (stressLevel > 60)
         {
             return "현재 약간 스트레스를 받은 상태입니다. 초초해하며 감정표현이 조금 격해집니다.";
         }
@@ -173,8 +173,11 @@ public class ChatManager : MonoBehaviour
     public void StartNPCChat(string npcname)
     {
         Chat_Panel.SetActive(true);
+        LieDetect_Panel.SetActive(true);
+        
         NPCName.text = npcname;
         chatText.text = "";
+        LieText.text = "";
 
         messageHistory.Clear();
 
@@ -204,6 +207,30 @@ public class ChatManager : MonoBehaviour
     public void StartNPC4Chat(Button clickedButton)
     {
         StartNPCChat("Leo");
+    }
+
+    /*
+    거짓말 탐지 버튼 클릭 시 호출되는 함수
+    */
+
+    public void OnLieDetectionButtonClicked()
+    {
+        string npcName = NPCName.text;
+
+        if (!npcSettings.ContainsKey(npcName))
+        {
+            Debug.LogError($"NPC {npcName} not found.");
+            return;
+        }
+
+        if (lastTruthStatus == "진실")
+        {
+            LieText.text = "진실입니다!";
+        }
+        else if (lastTruthStatus == "거짓")
+        {
+            LieText.text = "거짓입니다!";
+        }
     }
 
     /*
@@ -237,7 +264,7 @@ public class ChatManager : MonoBehaviour
 
         //int stressLevel = currentNPC.StressLevel;
         string systemMessage = DetermineEmotion(currentNPC.StressLevel);
-        currentNPC.StressLevel -= 10;
+        currentNPC.StressLevel -= 20;
         messageHistory.Add(new ChatGPTClient.Message { role = "system", content = systemMessage });
 
         Debug.Log($"User: {systemMessage}");
@@ -257,23 +284,41 @@ public class ChatManager : MonoBehaviour
         {
             // Assistant 메시지 추가
             messageHistory.Add(new ChatGPTClient.Message { role = "assistant", content = response });
-            chatText.text = $"<b>{response}\n";
+
+            Debug.Log($"Full response: {response}");
+
+            string mainResponse = response;
+            lastTruthStatus = "";
+
+            int tagStartIndex = response.LastIndexOf('[');
+            int tagEndIndex = response.LastIndexOf(']');
+
+            if (tagStartIndex != -1 && tagEndIndex != -1 && tagEndIndex > tagStartIndex)
+            {
+                string tag =  response.Substring(tagStartIndex + 1, tagEndIndex - tagStartIndex - 1);
+                if (tag == "진실" || tag == "거짓")
+                {
+                    lastTruthStatus = tag;
+                    mainResponse = response.Substring(0, tagStartIndex).Trim();
+                }
+            }
+            chatText.text = $"<b>{mainResponse}\n";
+            LieText.text = "";
         }
     }
     void Start()
     {
         NPC maya = new NPC();
-        maya.StressResistance = 1;
         // 불륜 및 Leo 관련 증거
-        maya.SensitiveTopics.Add("반지", 80);
-        maya.SensitiveTopics.Add("불륜", 90);  // '불륜', '바람' 등의 단어는 극도로 민감
-        maya.SensitiveTopics.Add("바람", 90);
+        maya.SensitiveTopics.Add("반지", 70);
+        maya.SensitiveTopics.Add("불륜", 80);  // '불륜', '바람' 등의 단어는 극도로 민감
+        maya.SensitiveTopics.Add("바람", 80);
         maya.SensitiveTopics.Add("Leo", 60);  // Leo 언급 자체도 큰 스트레스
         // 직접적으로 들통날 수 있는 증거물
-        maya.SensitiveTopics.Add("시계", 70); // 이미 코드 예시 존재, Leo와 연관
+        maya.SensitiveTopics.Add("시계", 30); // 이미 코드 예시 존재, Leo와 연관
         maya.SensitiveTopics.Add("사진", 10); // Leo에게 준 선물로 확인 가능
         // 인터뷰 기사나 언론 노출 관련
-        maya.SensitiveTopics.Add("인터뷰", 40); // 자신이 한 인터뷰 언급 시 이미지 관리 부담
+        maya.SensitiveTopics.Add("인터뷰", 30); // 자신이 한 인터뷰 언급 시 이미지 관리 부담
         maya.SensitiveTopics.Add("스캔들", 50); // 스캔들성 질문은 이미지에 타격
         // Hazel 관련
         maya.SensitiveTopics.Add("죽음", 30); // 죽음 언급 자체도 심리적 압박
@@ -305,8 +350,9 @@ public class ChatManager : MonoBehaviour
         // Leo 언급
         oliver.SensitiveTopics.Add("Leo", 20);       // Leo 언급은 불륜 관련만큼은 아니지만 부담
 
+        npcSettings.Add("Oliver", oliver);
+
         NPC lucy = new NPC();
-        lucy.StressResistance = 8;
         // 논문 및 인정받지 못한 노력 관련
         lucy.SensitiveTopics.Add("논문", 40);        // 논문 관련 전반적 언급
         lucy.SensitiveTopics.Add("이름 누락", 80);   // 이름 누락은 최상위 민감 주제
@@ -323,9 +369,10 @@ public class ChatManager : MonoBehaviour
 
         // 메모 관련
         lucy.SensitiveTopics.Add("메모", 10);         // 메모 언급은 낮은 정도의 스트레스
+        npcSettings.Add("Lucy", lucy);
+        
 
         NPC leo = new NPC();
-        leo.StressResistance = 10;
 
         // 불륜 관련 키워드
         leo.SensitiveTopics.Add("불륜", 80);   // 비밀 관계 들통날 수 있는 핵심 키워드
@@ -343,6 +390,8 @@ public class ChatManager : MonoBehaviour
 
         // 기타 이미지 관리 관련(스캔들, 연루)
         leo.SensitiveTopics.Add("스캔들", 50);   // 스캔들성 질문은 이미지와 커리어에 타격 -> 스트레스
+
+        npcSettings.Add("Leo", leo);  
         }
 
     /*
