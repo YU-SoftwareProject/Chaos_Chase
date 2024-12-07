@@ -13,10 +13,12 @@ public class FinishButtonController : MonoBehaviour
 
     //새롭게 추가(2024/11/13)
     public GameObject Chat_Panel;
+    public GameObject LieDetectPanel;
 
     void Start()
     {
         FinishButton.SetActive(false);
+        FinishButton.SetActive(true);
     }
 
     public void ShowFinishButton()
