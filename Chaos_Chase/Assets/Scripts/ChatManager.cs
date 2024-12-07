@@ -18,6 +18,8 @@ public class ChatManager : MonoBehaviour
     public Button LieDetectionButton;
     public string fileContent;
     public ChatGPTClient chatGPTClient;
+    private int lieDetectonCount = 0;
+    private int maxLieDetectionCount = 5;
     private string lastTruthStatus = "";
     private List<ChatGPTClient.Message> messageHistory = new List<ChatGPTClient.Message>();
     private Dictionary<string, NPC> npcSettings = new Dictionary<string, NPC>();
@@ -217,19 +219,29 @@ public class ChatManager : MonoBehaviour
     {
         string npcName = NPCName.text;
 
+        if (lieDetectonCount >= maxLieDetectionCount)
+        {
+            LieText.text = "거짓말 탐지 횟수를 모두 사용하였습니다.";
+            return;
+        }
+
         if (!npcSettings.ContainsKey(npcName))
         {
             Debug.LogError($"NPC {npcName} not found.");
             return;
         }
 
+        lieDetectonCount++; // 거짓말 탐지 횟수 증가
+
+        int remainingLieDetectionCount = maxLieDetectionCount - lieDetectonCount; // 남은 거짓말 탐지 횟수
+
         if (lastTruthStatus == "진실")
         {
-            LieText.text = "진실입니다!";
+            LieText.text = $"진실입니다! (남은 횟수: {remainingLieDetectionCount}번)";
         }
         else if (lastTruthStatus == "거짓")
         {
-            LieText.text = "거짓입니다!";
+            LieText.text = $"거짓입니다! (남은 횟수: {remainingLieDetectionCount}번)";
         }
     }
 
