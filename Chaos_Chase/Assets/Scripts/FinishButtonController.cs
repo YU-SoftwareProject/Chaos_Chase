@@ -13,6 +13,7 @@ public class FinishButtonController : MonoBehaviour
 
     //새롭게 추가(2024/11/13)
     public GameObject Chat_Panel;
+    public GameObject LieDetectPanel;
 
     void Start()
     {
@@ -31,6 +32,7 @@ public class FinishButtonController : MonoBehaviour
         FinishButtonClickNum += 1;
         NPCSelection_Panel.SetActive(true);
         Chat_Panel.SetActive(false);
+        LieDetectPanel.SetActive(false);
 
         if (npcManager != null)
         {
