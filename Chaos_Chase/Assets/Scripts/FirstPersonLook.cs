@@ -19,6 +19,11 @@ public class FirstPersonLook : MonoBehaviour
     void Start()
     {
         //Cursor.lockState = CursorLockMode.Locked;
+
+        velocity = new Vector2(
+            character.localEulerAngles.y,
+            -transform.localEulerAngles.x
+        );
     }
 
     void Update()
