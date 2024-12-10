@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3f24c08b18da39c4a9d19c4450aae70a, type: 3}
-  m_Name: Glass
+  m_Name: Maya_Bracelet
   m_EditorClassIdentifier: 
-  id: 2
-  itemName: Glass
-  icon: {fileID: 21300000, guid: 90dc70dd63b9a20428a89c08fdb0e6ac, type: 3}
+  id: 10
+  itemName: Maya_Bracelet
+  icon: {fileID: 21300000, guid: b593173dd3f82be4488a9cd0f29194e6, type: 3}
